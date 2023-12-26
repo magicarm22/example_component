@@ -1,0 +1,3 @@
+version: "4.1.26"
+dependencies:
+  test/component_with_exclude_for_component_hash: "*"

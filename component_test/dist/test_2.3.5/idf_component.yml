@@ -1,0 +1,5 @@
+commit_sha: 252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111
+dependencies:
+  espressif/cmp: <4.0.6
+repository: https://test.ru
+version: 2.3.5
