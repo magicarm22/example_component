@@ -1,0 +1,21 @@
+name: Push placeholder_componenent_name to IDF Component Registry
+
+on:
+  push:
+    branches:
+      - placeholder_default_branch
+
+jobs:
+  upload_components:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Upload placeholder_componenent_name to IDF Component Registry
+        uses: magicarm22/upload-components-ci-action@feature/repo_commit_id_params
+        with:
+          name: test_uploading_component
+          namespace: "dmitry"
+          api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
+          repository_url: ${{ github.repositoryUrl }}
+          commit_id: ${{ github.sha }}
