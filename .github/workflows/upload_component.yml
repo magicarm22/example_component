@@ -9,12 +9,21 @@ jobs:
   upload_components:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+          repository: "kumekay/test_multiple_comp"
+      - name: Save information about repository to the github environment
+        run:
+          echo "GITHUB_REPOSITORY_URL=`git config --get remote.origin.url`" >> "$GITHUB_ENV";
+          echo "GITHUB_COMMIT_SHA=`git rev-parse HEAD`" >> "$GITHUB_ENV";
       - name: Upload placeholder_componenent_name to IDF Component Registry
         uses: magicarm22/upload-components-ci-action@feature/repo_commit_id_params
         with:
+          directories: "comp_a;comp_c"
           name: test_uploading_component
           namespace: "dmitry"
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
-          repository_url: ${{ github.repositoryUrl }}
-          commit_id: ${{ github.sha }}
+          registry_url: "https://components-staging.espressif.com/"
+          repository_url: ${{ env.GITHUB_REPOSITORY_URL }}
+          commit_sha: ${{ env.GITHUB_COMMIT_SHA }}
